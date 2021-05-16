@@ -38,11 +38,13 @@
             android:name=".Barcode.Activity"
             android:screenOrientation="fullSensor"
             tools:replace="screenOrientation" />
-        <activity android:name=".Barcode.SubActivity" />
         <activity android:name=".Barcode.Foodinform"/>
+
+        <activity android:name=".Barcode.SubActivity" />
         <activity
             android:name=".Barcode.SubActivity2"
             android:launchMode="singleInstance" />
+
 
         <receiver
             android:name=".Pushalarm.PushReceiver"

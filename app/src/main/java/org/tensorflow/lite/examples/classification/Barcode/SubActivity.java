@@ -15,24 +15,19 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.TextView;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.tensorflow.lite.examples.classification.Pushalarm.PushReceiver;
 import org.tensorflow.lite.examples.classification.R;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
-
-
-
 
 
 public class SubActivity extends AppCompatActivity {
@@ -40,7 +35,6 @@ public class SubActivity extends AppCompatActivity {
     AlarmManager alarmManager;
     EditText title;
     EditText editText;
-    TextView textView;
     DBHelper dbHelper;
     SQLiteDatabase db = null;
     Cursor cursor;
@@ -51,9 +45,13 @@ public class SubActivity extends AppCompatActivity {
     int Year, Month, Day;
     String date;
 
+    //현재시간으로 설정
     Calendar cal = Calendar.getInstance();
     Calendar alcal = Calendar.getInstance();
     DateFormat df = new SimpleDateFormat("yyyy년 MM월 dd일");
+
+    PendingIntent pendingIntent;
+    AlarmManager mAlarmManager;
 
 
     @Override
@@ -65,66 +63,71 @@ public class SubActivity extends AppCompatActivity {
         time = findViewById(R.id.daytime);
         Button save = (Button) findViewById(R.id.save);
 
-        textView = findViewById(R.id.ShelfLife);
 
 
         };
 
 
     public void insert(View view) {
-        long altime = alcal.getTimeInMillis();
+
         String titleintent = title.getText().toString();
+        int alid = (int)((Math.random() * (10000 - 1)) + 1);
+
 
         date = df.format(cal.getTime())+" 까지 입니다." ;
         Intent intent = new Intent();
         intent.putExtra("TITLE", title.getText().toString());
         intent.putExtra("DATE", date);
-        intent.putExtra("ALTIME", altime);
         setResult(Activity.RESULT_OK, intent);
-        alcal = cal;
 
-        int alid = (int)((Math.random() * (10000 - 1)) + 1);
+//여기서부터 알람 설정
+        //현재날짜와 설정한날짜 빼기
+        long difftime = (cal.getTimeInMillis() - alcal.getTimeInMillis())/(24*60*60*1000);
 
-        //Calendar altime2 = Calendar.getInstance();
-//        altime2.set(Calendar.YEAR,Year);
-//        altime2.set(Calendar.MONTH,Month);
- //       altime2.set(Calendar.DATE,Day);
-       // alcal.add(Calendar.DATE,-2);
-        //alcal.add(Calendar.SECOND,20);
-        //alcal.add(Calendar.DATE,-3);
+
+
+
+
 
         Intent mAlarmIntent = new Intent(this, PushReceiver.class);
         mAlarmIntent.putExtra("TITLE", title.getText().toString());
         mAlarmIntent.putExtra("DATE", date);
 
+        //7일전 알림
+        if (difftime >= 7) {
+            mAlarmIntent.putExtra("ALDAY", "7");
+            cal.add(Calendar.DAY_OF_MONTH, -7);
+            cal.add(Calendar.SECOND, 10);
+            pendingIntent = PendingIntent.getBroadcast(this, alid + 1, mAlarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);//아이디 저장
+            mAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+            mAlarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
+            cal.add(Calendar.DATE, 7);
+            Toast.makeText(getApplicationContext(), "7", Toast.LENGTH_SHORT).show();
+        }
 
-        mAlarmIntent.putExtra("ALDAY", "7");
-        alcal.add(Calendar.SECOND,10);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this,  alid+1 , mAlarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);//아이디 저장
-        AlarmManager mAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        mAlarmManager.set(AlarmManager.RTC_WAKEUP,alcal.getTimeInMillis(),pendingIntent);
+        //3일전 알림
+        if (difftime >= 3) {
+            mAlarmIntent.putExtra("ALDAY", "3");
+            cal.add(Calendar.DAY_OF_MONTH, -3);
+            cal.add(Calendar.SECOND, 10);
+            pendingIntent = PendingIntent.getBroadcast(this, alid + 2, mAlarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);//아이디 저장
+            mAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+            mAlarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
+            cal.add(Calendar.DATE, 3);
+            Toast.makeText(getApplicationContext(), "3", Toast.LENGTH_SHORT).show();
+        }
 
-        mAlarmIntent.putExtra("ALDAY", "3");
-        alcal.add(Calendar.SECOND,20);
-        pendingIntent = PendingIntent.getBroadcast(this,  alid+2 , mAlarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);//아이디 저장
-        mAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        mAlarmManager.set(AlarmManager.RTC_WAKEUP,alcal.getTimeInMillis(),pendingIntent);
-
-        mAlarmIntent.putExtra("ALDAY", "1");
-        alcal.add(Calendar.SECOND,20);
-        pendingIntent = PendingIntent.getBroadcast(this,  alid+3 , mAlarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);//아이디 저장
-        mAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        mAlarmManager.set(AlarmManager.RTC_WAKEUP,alcal.getTimeInMillis(),pendingIntent);
-
-
-
-        //alcal.add(Calendar.SECOND,10);
-        //pendingIntent = PendingIntent.getBroadcast(this,  alid , mAlarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);//아이디 저장
-        //mAlarmManager.set(AlarmManager.RTC_WAKEUP,alcal.getTimeInMillis(),pendingIntent);//시간후 보냄
-
-
-        //alarm(title.getText().toString(),date,alcal.getTimeInMillis());
-
+        if (difftime >= 1) {
+            //1일전 알림
+            mAlarmIntent.putExtra("ALDAY", "1");
+            cal.add(Calendar.DAY_OF_MONTH, -1);
+            cal.add(Calendar.SECOND, 10);
+            pendingIntent = PendingIntent.getBroadcast(this, alid + 3, mAlarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);//아이디 저장
+            mAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+            mAlarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
+            cal.add(Calendar.DATE, 1);
+            Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_SHORT).show();
+        }
 
 
 
@@ -156,14 +159,6 @@ public class SubActivity extends AppCompatActivity {
             cal.set(Calendar.YEAR, Year);
             cal.set(Calendar.MONTH, Month);
 
-            alcal = cal;
-            //alcal.set(Year,Month,Day);
-            //alcal.set(Calendar.HOUR_OF_DAY, 15);
-            //alcal.set(Calendar.MINUTE, 44);
-            //alcal.add(Calendar.SECOND, 10);
-
-
-
 
             time.setText(df.format(cal.getTime()));
 
@@ -190,22 +185,7 @@ public class SubActivity extends AppCompatActivity {
         time.setText(df.format(cal.getTime()));
     }
 
-    public void alarm(String title,String day, Long altime){
-        Intent mAlarmIntent = new Intent(this, PushReceiver.class);
-        mAlarmIntent.putExtra("TITLE", title);
-        mAlarmIntent.putExtra("DATE", day);
 
-
-
-
-       //int alid = Integer.valueOf(title + day);//오류있음
-       PendingIntent pendingIntent = PendingIntent.getBroadcast(this,  1 , mAlarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);//아이디 저장
-       AlarmManager mAlarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-       mAlarmManager.set(AlarmManager.RTC_WAKEUP,alcal.getTimeInMillis(),pendingIntent);//시간후 보냄
-
-
-
-    }
 }
 
 

@@ -573,7 +573,7 @@ public abstract class CameraActivity extends AppCompatActivity
 
           if (/*recognitionTextView.getText().toString().equalsIgnoreCase("멜론") &&*/confi>=98 ) {
 
-            Intent cameraintent = new Intent(getApplicationContext(),SubActivity2.class);
+            Intent cameraintent = new Intent(getApplicationContext(), SubActivity2.class);
             cameraintent.putExtra("resultname", recognition.getTitle());
 
 

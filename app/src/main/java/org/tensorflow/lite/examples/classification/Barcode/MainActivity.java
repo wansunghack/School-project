@@ -160,23 +160,7 @@ public class MainActivity extends AppCompatActivity {
     String title="", day="";
     String code;
     String key="534c4f83766b49dbbd77";
-    Long altime;
 
-    public void alarm(String title,String day, Long altime){
-        Calendar altime2 = Calendar.getInstance();
-        altime2.add(Calendar.SECOND,10);
-
-        Intent mAlarmIntent = new Intent(this, PushReceiver.class);
-        mAlarmIntent.putExtra("TITLE", title);
-        mAlarmIntent.putExtra("DATE", day);
-
-        //int alid = Integer.valueOf(title + day);//오류있음
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this,  1 , mAlarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);//아이디 저장
-        AlarmManager mAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        mAlarmManager.set(AlarmManager.RTC_WAKEUP,altime2.getTimeInMillis(),pendingIntent);//시간후 보냄
-
-
-    }
 
 
     @Override
@@ -187,13 +171,11 @@ public class MainActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 title = data.getStringExtra("TITLE");
                 day = data.getStringExtra("DATE");
-                altime = data.getLongExtra("ALTIME",0);
                 db.execSQL("INSERT INTO tableName VALUES (null,'" + title + "', '" +day+  "');");
                 Toast.makeText(this, "저장", Toast.LENGTH_SHORT).show();
                 listUpdate(null);
 
 
-                //alarm(title,day,altime);
 
             } else if (resultCode == RESULT_CANCELED) { }
         }
