@@ -70,6 +70,11 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    PendingIntent pendingIntent;
+    AlarmManager mAlarmManager;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -150,6 +155,13 @@ public class MainActivity extends AppCompatActivity {
         db.execSQL("DELETE FROM tableName WHERE id = '"+id+"';");
         Toast.makeText(this, "삭제되었습니다.", Toast.LENGTH_SHORT).show();
         listUpdate(null);
+
+
+
+        Intent mAlarmIntent = new Intent(this, PushReceiver.class);
+        pendingIntent = PendingIntent.getBroadcast(this, 1, mAlarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);//아이디 저장
+        mAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        mAlarmManager.cancel(pendingIntent);
     }
     public void add(View view) {
         Intent intent = new Intent(getApplicationContext(),SubActivity.class);
@@ -429,7 +441,6 @@ public class MainActivity extends AppCompatActivity {
             TextView textView1 = (TextView) convertView.findViewById(R.id.textView1);
             TextView textView2 = (TextView) convertView.findViewById(R.id.textView2);
             Item item = items.get(pos);
-
             String str = item.info.replaceAll("[^\\d]", "");
             int numInt = Integer.parseInt(str);
             int number = Integer.parseInt(ntime);
