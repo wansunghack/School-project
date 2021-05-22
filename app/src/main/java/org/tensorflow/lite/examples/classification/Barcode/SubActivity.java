@@ -110,7 +110,7 @@ public class SubActivity extends AppCompatActivity {
             mAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
             mAlarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
             cal.add(Calendar.DATE, 7);
-            Toast.makeText(getApplicationContext(), "7", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "7", Toast.LENGTH_SHORT).show();
         }
 
         //3일전 알림
@@ -122,7 +122,7 @@ public class SubActivity extends AppCompatActivity {
             mAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
             mAlarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
             cal.add(Calendar.DATE, 3);
-            Toast.makeText(getApplicationContext(), "3", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "3", Toast.LENGTH_SHORT).show();
         }
 
         if (difftime >= 1) {
@@ -134,7 +134,7 @@ public class SubActivity extends AppCompatActivity {
             mAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
             mAlarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
             cal.add(Calendar.DATE, 1);
-            Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_SHORT).show();
         }
 
 
