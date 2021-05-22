@@ -49,6 +49,7 @@ public class SubActivity2 extends AppCompatActivity {
     Calendar cal = Calendar.getInstance();
     Calendar alcal = Calendar.getInstance();
     DateFormat df = new SimpleDateFormat("yyyy년 MM월 dd일");
+    DateFormat alcaldf = new SimpleDateFormat("mmss");
 
     PendingIntent pendingIntent;
     AlarmManager mAlarmManager;
@@ -77,8 +78,11 @@ public class SubActivity2 extends AppCompatActivity {
 
     public void insert(View view) {
 
-        String titleintent = title.getText().toString();
-        int alid = (int)((Math.random() * (10000 - 1)) + 1);
+
+        String alids = alcaldf.format(cal.getTime()).concat(alcaldf.format(alcal.getTime()));
+        int alid = Integer.parseInt(alids) *10;
+        alids = Integer.toString(alid);
+        Toast.makeText(getApplicationContext(), alids, Toast.LENGTH_SHORT).show();
 
 
         date = df.format(cal.getTime())+" 까지 입니다." ;

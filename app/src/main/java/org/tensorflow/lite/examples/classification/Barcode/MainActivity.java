@@ -13,6 +13,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -152,16 +153,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void delete(int id) {//삭제코드
+
+
+
+        cursor = db.rawQuery("SELECT alid FROM tableName WHERE id ="+"\""+id+"\"", null);
+        cursor.moveToFirst();
+        String alids = cursor.getString(cursor.getColumnIndex("alid"));
+        int alid = Integer.parseInt(alids);
+
+        Intent mAlarmIntent = new Intent(this, PushReceiver.class);
+        mAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        pendingIntent = PendingIntent.getBroadcast(this, alid+7, mAlarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);//아이디 저장
+        mAlarmManager.cancel(pendingIntent);
+        pendingIntent = PendingIntent.getBroadcast(this, alid+3, mAlarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        mAlarmManager.cancel(pendingIntent);
+        pendingIntent = PendingIntent.getBroadcast(this, alid+1, mAlarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        mAlarmManager.cancel(pendingIntent);
+
+
         db.execSQL("DELETE FROM tableName WHERE id = '"+id+"';");
         Toast.makeText(this, "삭제되었습니다.", Toast.LENGTH_SHORT).show();
         listUpdate(null);
 
-
-
-        Intent mAlarmIntent = new Intent(this, PushReceiver.class);
-        pendingIntent = PendingIntent.getBroadcast(this, 1, mAlarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);//아이디 저장
-        mAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        mAlarmManager.cancel(pendingIntent);
     }
     public void add(View view) {
         Intent intent = new Intent(getApplicationContext(),SubActivity.class);
@@ -169,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    String title="", day="";
+    String title="", day="" ,alid="";
     String code;
     String key="534c4f83766b49dbbd77";
 
@@ -183,7 +196,8 @@ public class MainActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 title = data.getStringExtra("TITLE");
                 day = data.getStringExtra("DATE");
-                db.execSQL("INSERT INTO tableName VALUES (null,'" + title + "', '" +day+  "');");
+                alid = data.getStringExtra("ALID");
+                db.execSQL("INSERT INTO tableName VALUES (null,'" + title + "', '" +day+  "','"+alid+"');");
                 Toast.makeText(this, "저장", Toast.LENGTH_SHORT).show();
                 listUpdate(null);
 

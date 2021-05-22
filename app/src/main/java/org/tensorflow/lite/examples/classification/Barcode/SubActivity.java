@@ -28,6 +28,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
+import java.util.Random;
 
 
 public class SubActivity extends AppCompatActivity {
@@ -49,9 +50,12 @@ public class SubActivity extends AppCompatActivity {
     Calendar cal = Calendar.getInstance();
     Calendar alcal = Calendar.getInstance();
     DateFormat df = new SimpleDateFormat("yyyy년 MM월 dd일");
+    DateFormat alcaldf = new SimpleDateFormat("mmss");
 
     PendingIntent pendingIntent;
     AlarmManager mAlarmManager;
+
+
 
 
     @Override
@@ -70,14 +74,19 @@ public class SubActivity extends AppCompatActivity {
 
     public void insert(View view) {
 
-        String titleintent = title.getText().toString();
-        int alid = (int)((Math.random() * (10000 - 1)) + 1);
+
+        String alids = alcaldf.format(cal.getTime()).concat(alcaldf.format(alcal.getTime()));
+        int alid = Integer.parseInt(alids) *10;
+        alids = Integer.toString(alid);
+        Toast.makeText(getApplicationContext(), alids, Toast.LENGTH_SHORT).show();
 
 
-        date = df.format(cal.getTime())+" 까지 입니다." ;
+        date = df.format(cal.getTime())+" 까지 입니다.";
         Intent intent = new Intent();
         intent.putExtra("TITLE", title.getText().toString());
         intent.putExtra("DATE", date);
+        intent.putExtra("ALID", alids);
+
         setResult(Activity.RESULT_OK, intent);
 
 //여기서부터 알람 설정
@@ -98,7 +107,7 @@ public class SubActivity extends AppCompatActivity {
             mAlarmIntent.putExtra("ALDAY", "7");
             cal.add(Calendar.DAY_OF_MONTH, -7);
             cal.add(Calendar.SECOND, 10);
-            pendingIntent = PendingIntent.getBroadcast(this, alid + 1, mAlarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);//아이디 저장
+            pendingIntent = PendingIntent.getBroadcast(this, alid + 7, mAlarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);//아이디 저장
             mAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
             mAlarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
             cal.add(Calendar.DATE, 7);
@@ -110,7 +119,7 @@ public class SubActivity extends AppCompatActivity {
             mAlarmIntent.putExtra("ALDAY", "3");
             cal.add(Calendar.DAY_OF_MONTH, -3);
             cal.add(Calendar.SECOND, 10);
-            pendingIntent = PendingIntent.getBroadcast(this, alid + 2, mAlarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);//아이디 저장
+            pendingIntent = PendingIntent.getBroadcast(this, alid + 3, mAlarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);//아이디 저장
             mAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
             mAlarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
             cal.add(Calendar.DATE, 3);
@@ -122,7 +131,7 @@ public class SubActivity extends AppCompatActivity {
             mAlarmIntent.putExtra("ALDAY", "1");
             cal.add(Calendar.DAY_OF_MONTH, -1);
             cal.add(Calendar.SECOND, 10);
-            pendingIntent = PendingIntent.getBroadcast(this, alid + 3, mAlarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);//아이디 저장
+            pendingIntent = PendingIntent.getBroadcast(this, alid + 1, mAlarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);//아이디 저장
             mAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
             mAlarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
             cal.add(Calendar.DATE, 1);
