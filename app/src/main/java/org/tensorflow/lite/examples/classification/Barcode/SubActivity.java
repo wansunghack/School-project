@@ -78,7 +78,6 @@ public class SubActivity extends AppCompatActivity {
         String alids = alcaldf.format(cal.getTime()).concat(alcaldf.format(alcal.getTime()));
         int alid = Integer.parseInt(alids) *10;
         alids = Integer.toString(alid);
-        Toast.makeText(getApplicationContext(), alids, Toast.LENGTH_SHORT).show();
 
 
         date = df.format(cal.getTime())+" 까지 입니다.";
