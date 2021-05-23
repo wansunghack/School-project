@@ -161,14 +161,8 @@ public class MainActivity extends AppCompatActivity {
         String alids = cursor.getString(cursor.getColumnIndex("alid"));
         int alid = Integer.parseInt(alids);
 
-        Intent mAlarmIntent = new Intent(this, PushReceiver.class);
-        mAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        pendingIntent = PendingIntent.getBroadcast(this, alid+7, mAlarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);//아이디 저장
-        mAlarmManager.cancel(pendingIntent);
-        pendingIntent = PendingIntent.getBroadcast(this, alid+3, mAlarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        mAlarmManager.cancel(pendingIntent);
-        pendingIntent = PendingIntent.getBroadcast(this, alid+1, mAlarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        mAlarmManager.cancel(pendingIntent);
+        delalarm(alid);
+
 
 
         db.execSQL("DELETE FROM tableName WHERE id = '"+id+"';");
@@ -391,9 +385,25 @@ public class MainActivity extends AppCompatActivity {
         builder.setIcon(android.R.drawable.ic_dialog_alert);
 
 
+
+
         builder.setNegativeButton("예", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+
+                cursor = db.rawQuery("SELECT * FROM tableName ORDER BY alid ASC", null);
+                cursor.moveToFirst();
+                int i = cursor.getCount();
+                for(int j = 1; j <= i; j++){
+
+                    String alids = cursor.getString(cursor.getColumnIndex("alid"));
+                    int alid = Integer.parseInt(alids);
+                    delalarm(alid);
+                    cursor.moveToNext();
+
+                }
+
+
                 db.execSQL("DELETE FROM tablename");
                 Toast.makeText(getApplicationContext(), "전체 삭제되었습니다", Toast.LENGTH_SHORT).show();
                 listUpdate(null);
@@ -409,6 +419,20 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
     }
 
+
+    public void delalarm(int alid){
+
+        Intent mAlarmIntent = new Intent(this, PushReceiver.class);
+        mAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        pendingIntent = PendingIntent.getBroadcast(this, alid+7, mAlarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);//아이디 저장
+        mAlarmManager.cancel(pendingIntent);
+        pendingIntent = PendingIntent.getBroadcast(this, alid+3, mAlarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        mAlarmManager.cancel(pendingIntent);
+        pendingIntent = PendingIntent.getBroadcast(this, alid+1, mAlarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        mAlarmManager.cancel(pendingIntent);
+
+
+    }
 
 
 
