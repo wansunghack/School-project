@@ -214,19 +214,12 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         getXmlData();
+                        Intent intenter = new Intent(getApplicationContext(),SubBarcodeActivity.class);
+                        intenter.putExtra("btitle",title);
+                        intenter.putExtra("bday",day);
+                        startActivity(intenter);
+                        startActivityForResult(intenter,1);
 
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Intent intent = new Intent(getApplicationContext(),SubActivity.class);
-                                intent.putExtra("btitle",title);
-                                intent.putExtra("bday",day);
-                                startActivity(intent);
-
-                                listUpdate(null);
-
-                            }
-                        });
                     }
                 }).start();
                 // todo

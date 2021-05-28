@@ -44,6 +44,9 @@
         <activity
             android:name=".Barcode.SubActivity2"
             android:launchMode="singleInstance" />
+        <activity
+            android:name=".Barcode.SubBarcodeActivity"
+            android:launchMode="singleInstance" />
 
 
         <receiver
