@@ -37,7 +37,6 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 import org.tensorflow.lite.examples.classification.Teachable.ClassifierActivity;
-import org.tensorflow.lite.examples.classification.Pushalarm.PushReceiver;
 import org.tensorflow.lite.examples.classification.R;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -311,7 +310,11 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.menu2:
                 showMessge();
-                return true; }
+                return true;
+            case R.id.menu3:
+                showMessge2();
+                return true;
+        }
         return super.onOptionsItemSelected(item); }
 
     int Year=0, Month=0, Day=0;
@@ -375,6 +378,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+
+
         builder.setPositiveButton("아니오", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) { }});
@@ -383,6 +388,52 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    public void showMessge2(){
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setTitle("안내");
+        builder.setMessage("기간이 지난 품목들을 삭제 하시겠습니까?");
+        builder.setIcon(android.R.drawable.ic_dialog_alert);
+
+
+        builder.setNegativeButton("예", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                cursor = db.rawQuery("SELECT * FROM tableName ORDER BY info ASC", null);
+                cursor.moveToLast();
+
+                Calendar calinfo = Calendar.getInstance();
+                String calinfo_st = df2.format(calinfo.getTime());
+                int calinfo_int = Integer.parseInt(calinfo_st);
+
+
+
+                int i2 = cursor.getCount();
+                for(int j = i2; j >= 1; j--){
+
+                    String infos = cursor.getString(cursor.getColumnIndex("info"));
+                    String infos2 = infos.replaceAll("[^0-9]", "");
+                    int infos3 = Integer.parseInt(infos2);
+
+                    if(infos3 < calinfo_int) {
+                        db.execSQL("DELETE FROM tableName WHERE info = '"+infos+"';");
+                    }
+                    Toast.makeText(getApplicationContext(), "기간이 지난 식품들이 삭제 되었습니다.", Toast.LENGTH_SHORT).show();
+                    cursor.moveToPrevious();
+
+                }
+            }
+        });
+
+
+        builder.setPositiveButton("아니오", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) { }});
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
 
 
 

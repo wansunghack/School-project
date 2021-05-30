@@ -7,38 +7,61 @@
 
     <Button
         android:id="@+id/stop"
-        android:layout_width="159dp"
-        android:layout_height="102dp"
-        android:text="요리 검색하기"
+        android:layout_width="161dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="40dp"
+        android:text="네이버에 요리 검색"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="match_parent"
-        android:layout_height="134dp"
-        android:text="ERROR"
+        android:layout_width="0dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="20dp"
         android:gravity="center"
+        android:text="ERROR"
         android:textSize="40sp"
-        app:layout_constraintTop_toTopOf="@+id/guideline4"
-        tools:layout_editor_absoluteX="0dp"
-        android:layout_marginTop="20dp"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline4" />
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
         android:gravity="center"
         android:text="어떤 요리를 할지 고민인가요?"
         android:textSize="25sp"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="57dp" />
+        app:layout_constraintGuide_begin="25dp" />
+
+    <Button
+        android:id="@+id/stop2"
+        android:layout_width="161dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="20dp"
+        android:text="구글에 요리 검색"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/stop" />
+
+    <Button
+        android:id="@+id/stop3"
+        android:layout_width="161dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="28dp"
+        android:text="유튜브에 요리 검색"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/stop2" />
 </androidx.constraintlayout.widget.ConstraintLayout>
