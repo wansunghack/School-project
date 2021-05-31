@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
     <menu xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto">
-        <item
+    <item
             android:id="@+id/menu1"
             android:title="간단 타이머"
             app:showAsAction="never"
@@ -13,4 +13,8 @@
             android:title="전체삭제"
             app:showAsAction="never">
         </item>
-    </menu>
+    <item
+        android:id="@+id/menu3"
+        android:title="지난날 삭제"
+        app:showAsAction="never"></item>
+</menu>
