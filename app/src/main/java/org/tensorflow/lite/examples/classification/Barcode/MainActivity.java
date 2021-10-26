@@ -37,6 +37,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import org.tensorflow.lite.examples.classification.Pushalarm.PushReceiver;
 import org.tensorflow.lite.examples.classification.Teachable.ClassifierActivity;
 import org.tensorflow.lite.examples.classification.R;
 import org.xmlpull.v1.XmlPullParser;
@@ -448,10 +449,11 @@ public class MainActivity extends AppCompatActivity {
                     if(infos3 < calinfo_int) {
                         db.execSQL("DELETE FROM tableName WHERE info = '"+infos+"';");
                     }
-                    Toast.makeText(getApplicationContext(), "기간이 지난 식품들이 삭제 되었습니다.", Toast.LENGTH_SHORT).show();
                     cursor.moveToPrevious();
 
                 }
+                Toast.makeText(getApplicationContext(), "기간이 지난 식품들이 삭제 되었습니다.", Toast.LENGTH_SHORT).show();
+                listUpdate(null);
             }
         });
 
