@@ -53,6 +53,7 @@ public class SubActivity2 extends AppCompatActivity {
 
     PendingIntent pendingIntent;
     AlarmManager mAlarmManager;
+    //
 
 
 
