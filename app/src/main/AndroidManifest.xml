@@ -58,9 +58,7 @@
             </intent-filter>
         </receiver>
 
-        <service
-            android:name=".Pushalarm.PushService"
-            android:enabled="true" />
+
     </application>
 
 </manifest>

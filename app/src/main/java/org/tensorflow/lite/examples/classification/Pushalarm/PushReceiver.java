@@ -3,6 +3,7 @@ package org.tensorflow.lite.examples.classification.Pushalarm;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -14,14 +15,21 @@ import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
 
+import org.tensorflow.lite.examples.classification.Barcode.MainActivity;
 import org.tensorflow.lite.examples.classification.R;
 
 public class PushReceiver extends BroadcastReceiver {
+
     @Override
     public void onReceive(Context context, Intent intent) {
-        Intent mServiceintent = new Intent(context, PushService.class);
-        mServiceintent.putExtra("TITLE",intent.getStringExtra("TITLE"));
-        mServiceintent.putExtra("DATE",intent.getStringExtra("DATE"));
+        Intent cintent = new Intent(context.getApplicationContext(), MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        PendingIntent cpendingintent = PendingIntent.getActivity(context.getApplicationContext(),0, cintent,PendingIntent.FLAG_UPDATE_CURRENT);
+
+
+
+
 
         //Toast.makeText(context,"실험",Toast.LENGTH_LONG).show();
 
@@ -31,6 +39,8 @@ public class PushReceiver extends BroadcastReceiver {
         String TITLE = intent.getStringExtra("TITLE");
         String DATE = intent.getStringExtra("DATE");
         String ALDAY = intent.getStringExtra("ALDAY");
+
+
 
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
@@ -47,9 +57,11 @@ public class PushReceiver extends BroadcastReceiver {
             builder= new NotificationCompat.Builder(context, null);
         }
 
-        builder.setSmallIcon(R.mipmap.ic_launcherwsh_round);
-        builder.setContentTitle(TITLE+"의 유통기한이 "+ALDAY+"일 남았습니다");//알림창 제목
-        builder.setContentText(DATE);
+        builder.setSmallIcon(R.mipmap.ic_launcherwsh_round)
+        .setContentTitle(TITLE+"의 유통기한이 "+ALDAY+"일 남았습니다")//알림창 제목
+        .setContentText(DATE)
+        .setContentIntent(cpendingintent)
+        .setAutoCancel(true);
 
         Bitmap bm= BitmapFactory.decodeResource(getResources(),R.mipmap.ic_launcherwsh);
         builder.setLargeIcon(bm);
