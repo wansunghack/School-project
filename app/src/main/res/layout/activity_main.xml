@@ -2,31 +2,40 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/guideline"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/guideline"
     android:orientation="vertical"
-    android:padding="16dp"
+    android:padding="0dp"
     tools:context=".Barcode.MainActivity">
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="0dp"
+        android:background="@drawable/background"
         android:orientation="vertical">
+
         <ListView
             android:id="@+id/listview1"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="9"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="16dp"></ListView>
+            tools:layout_editor_absoluteX="16dp"
+            ></ListView>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0px"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+
+            >
+
 
             <Button
                 android:id="@+id/ImageAdd"
@@ -34,34 +43,35 @@
                 android:layout_height="match_parent"
                 android:layout_margin="1dp"
                 android:layout_weight="1"
+                android:backgroundTint="#3DB2FF"
                 android:text="이미지인식"
+                app:icon="@drawable/imageadd"
                 app:rippleColor="#FFFFFF" />
 
             <Button
                 android:id="@+id/barcode"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:layout_margin="1dp"
+                android:layout_weight="1"
+                android:backgroundTint="#3DB2FF"
                 android:onClick="barcode"
-                android:text="바코드인식" />
+                android:text="바코드인식"
+                app:icon="@drawable/barcode" />
 
             <Button
                 android:id="@+id/add"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:layout_margin="1dp"
+                android:layout_weight="1"
+                android:backgroundTint="#3DB2FF"
                 android:onClick="add"
-                android:text="수동추가 " />
+                android:text="수동추가 "
+                app:icon="@drawable/add" />
 
         </LinearLayout>
     </LinearLayout>
-
-
-
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

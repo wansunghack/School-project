@@ -20,7 +20,9 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:onClick="day1plus"
-            android:text="+1day" />
+            android:text="+1day"
+            android:backgroundTint="#3DB2FF"
+            />
 
         <Button
             android:id="@+id/day3plus"
@@ -28,7 +30,9 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:onClick="day3plus"
-            android:text="+3DAY" />
+            android:text="+3DAY"
+            android:backgroundTint="#3DB2FF"
+            />
 
         <Button
             android:id="@+id/day5plus"
@@ -36,7 +40,9 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:onClick="day5plus"
-            android:text="+5DAY" />
+            android:text="+5DAY"
+            android:backgroundTint="#3DB2FF"
+            />
 
         <Button
             android:id="@+id/day7plus"
@@ -44,7 +50,9 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:onClick="day7plus"
-            android:text="+7DAY" />
+            android:text="+7DAY"
+            android:backgroundTint="#3DB2FF"
+            />
     </LinearLayout>
 
     <EditText
@@ -78,6 +86,7 @@
         android:text="수동입력"
         android:textAllCaps="false"
         app:layout_constraintTop_toBottomOf="@+id/sample"
+        android:backgroundTint="#3DB2FF"
         tools:layout_editor_absoluteX="0dp" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -113,7 +122,9 @@
         android:onClick="insert"
         android:text="저장"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toBottomOf="@id/recommend" />
+        app:layout_constraintTop_toBottomOf="@id/recommend"
+        android:backgroundTint="#3DB2FF"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
