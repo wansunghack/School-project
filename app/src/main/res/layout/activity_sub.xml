@@ -89,6 +89,7 @@
         android:onClick="daytime"
         android:text="날짜(유통기한) 수동 입력"
         android:textAllCaps="false"
+        app:icon="@drawable/ic_baseline_date_range_24"
         app:layout_constraintTop_toBottomOf="@+id/sample"
         tools:layout_editor_absoluteX="0dp" />
 

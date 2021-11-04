@@ -14,7 +14,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="0dp"
-        android:background="@drawable/background"
         android:orientation="vertical">
 
         <ListView
@@ -46,6 +45,7 @@
                 android:backgroundTint="#3DB2FF"
                 android:text="이미지인식"
                 app:icon="@drawable/imageadd"
+                app:iconPadding="6dp"
                 app:rippleColor="#FFFFFF" />
 
             <Button
@@ -57,7 +57,8 @@
                 android:backgroundTint="#3DB2FF"
                 android:onClick="barcode"
                 android:text="바코드인식"
-                app:icon="@drawable/barcode" />
+                app:icon="@drawable/barcode"
+                app:iconPadding="6dp" />
 
             <Button
                 android:id="@+id/add"
@@ -68,7 +69,8 @@
                 android:backgroundTint="#3DB2FF"
                 android:onClick="add"
                 android:text="수동추가 "
-                app:icon="@drawable/add" />
+                app:icon="@drawable/add"
+                app:iconPadding="6dp" />
 
         </LinearLayout>
     </LinearLayout>

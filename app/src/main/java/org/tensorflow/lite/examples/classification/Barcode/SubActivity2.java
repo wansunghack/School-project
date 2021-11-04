@@ -21,6 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import org.tensorflow.lite.examples.classification.Pushalarm.PushReceiver;
 import org.tensorflow.lite.examples.classification.R;
+import org.tensorflow.lite.examples.classification.Teachable.ClassifierActivity;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -75,6 +76,13 @@ public class SubActivity2 extends AppCompatActivity {
 
 
     };
+    @Override
+    public void onBackPressed() {
+        Intent movepase1 = new Intent(getApplicationContext() , ClassifierActivity.class);
+        startActivityForResult(movepase1,1);
+
+
+    }
 
 
     public void insert(View view) {
@@ -89,6 +97,7 @@ public class SubActivity2 extends AppCompatActivity {
         Intent intent = new Intent();
         intent.putExtra("TITLE", title.getText().toString());
         intent.putExtra("DATE", date);
+        intent.putExtra("ALID", alids);
         setResult(Activity.RESULT_OK, intent);
 
 //여기서부터 알람 설정
