@@ -69,7 +69,7 @@ public class SubActivity extends AppCompatActivity {
 
 
 
-        };
+        }
 
 
     public void insert(View view) {
