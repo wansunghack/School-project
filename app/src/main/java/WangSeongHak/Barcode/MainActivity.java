@@ -528,6 +528,7 @@ public class MainActivity extends AppCompatActivity {
             int numInt = Integer.parseInt(str);
             int number = Integer.parseInt(ntime);
             int tea = numInt - number;
+            textView1.setTextColor(Color.parseColor("#000000"));
             if(numInt-number<=0){
                 textView1.setTextColor(Color.parseColor("#FF0000"));
             }else if(numInt-number <= 3){
