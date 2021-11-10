@@ -26,20 +26,28 @@
         android:theme="@style/Theme.BarcodeDB"
         android:usesCleartextTraffic="true">
 
-        <activity android:name="WangSeongHak.Barcode.MainActivity">
+        <activity
+            android:name="WangSeongHak.Barcode.IntroActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.NoActionBar" >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
         </activity>
-        <activity android:name="WangSeongHak.Teachable.ClassifierActivity" />
+
+
+        <activity android:name="WangSeongHak.Barcode.MainActivity">
+
+        </activity>
+        <activity
+            android:name="WangSeongHak.Teachable.ClassifierActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name="WangSeongHak.Barcode.Activity"
             android:screenOrientation="fullSensor"
             tools:replace="screenOrientation" />
-        <activity android:name="WangSeongHak.Barcode.Foodinform"/>
-
+        <activity android:name="WangSeongHak.Barcode.Foodinform" />
         <activity android:name="WangSeongHak.Barcode.SubActivity" />
         <activity
             android:name="WangSeongHak.Barcode.SubActivity2"
@@ -47,7 +55,6 @@
         <activity
             android:name="WangSeongHak.Barcode.SubBarcodeActivity"
             android:launchMode="singleInstance" />
-
 
         <receiver
             android:name="WangSeongHak.Pushalarm.PushReceiver"
@@ -57,8 +64,6 @@
                 <action android:name="com.example.project.ALARM_START" />
             </intent-filter>
         </receiver>
-
-
     </application>
 
 </manifest>

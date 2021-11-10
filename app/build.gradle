@@ -17,15 +17,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    aaptOptions {
-        noCompress "tflite"
-    }
     compileOptions {
         sourceCompatibility = '1.8'
         targetCompatibility = '1.8'
     }
     lintOptions {
         abortOnError false
+    }
+    androidResources {
+        noCompress 'tflite'
     }
 }
 
