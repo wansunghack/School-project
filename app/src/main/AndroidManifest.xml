@@ -26,31 +26,31 @@
         android:theme="@style/Theme.BarcodeDB"
         android:usesCleartextTraffic="true">
 
-        <activity android:name=".Barcode.MainActivity">
+        <activity android:name="WangSeongHak.Barcode.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Teachable.ClassifierActivity" />
+        <activity android:name="WangSeongHak.Teachable.ClassifierActivity" />
         <activity
-            android:name=".Barcode.Activity"
+            android:name="WangSeongHak.Barcode.Activity"
             android:screenOrientation="fullSensor"
             tools:replace="screenOrientation" />
-        <activity android:name=".Barcode.Foodinform"/>
+        <activity android:name="WangSeongHak.Barcode.Foodinform"/>
 
-        <activity android:name=".Barcode.SubActivity" />
+        <activity android:name="WangSeongHak.Barcode.SubActivity" />
         <activity
-            android:name=".Barcode.SubActivity2"
+            android:name="WangSeongHak.Barcode.SubActivity2"
             android:launchMode="singleInstance" />
         <activity
-            android:name=".Barcode.SubBarcodeActivity"
+            android:name="WangSeongHak.Barcode.SubBarcodeActivity"
             android:launchMode="singleInstance" />
 
 
         <receiver
-            android:name=".Pushalarm.PushReceiver"
+            android:name="WangSeongHak.Pushalarm.PushReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
