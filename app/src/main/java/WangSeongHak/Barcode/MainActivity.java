@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -67,7 +68,6 @@ public class MainActivity extends AppCompatActivity {
     Calendar nowtime = Calendar.getInstance();
     DateFormat df2 = new SimpleDateFormat("yyyyMMdd");
     String ntime = df2.format(nowtime.getTime());
-
 
 
     PendingIntent pendingIntent;
@@ -514,6 +514,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
+
             final int pos = position;
             final Context context = parent.getContext();
 
@@ -528,11 +529,19 @@ public class MainActivity extends AppCompatActivity {
             int numInt = Integer.parseInt(str);
             int number = Integer.parseInt(ntime);
             int tea = numInt - number;
+
+            Drawable goodface =getResources().getDrawable(R.drawable.goodface);
+            Drawable badface =getResources().getDrawable(R.drawable.badface);
+            Drawable normalface =getResources().getDrawable(R.drawable.normalface);
+
             textView1.setTextColor(Color.parseColor("#000000"));
+            textView1.setCompoundDrawablesWithIntrinsicBounds(null, null, goodface,null);
             if(numInt-number<=0){
                 textView1.setTextColor(Color.parseColor("#FF0000"));
+                textView1.setCompoundDrawablesWithIntrinsicBounds(null, null, badface,null);
             }else if(numInt-number <= 3){
                 textView1.setTextColor(Color.parseColor("#0000FF"));
+                textView1.setCompoundDrawablesWithIntrinsicBounds(null, null, normalface,null);
             }
             textView1.setText(item.name);
             textView2.setText(item.info);
