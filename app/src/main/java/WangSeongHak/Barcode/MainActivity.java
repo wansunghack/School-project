@@ -531,17 +531,31 @@ public class MainActivity extends AppCompatActivity {
             int tea = numInt - number;
 
             Drawable goodface =getResources().getDrawable(R.drawable.goodface);
-            Drawable badface =getResources().getDrawable(R.drawable.badface);
+            Drawable goodface0 =getResources().getDrawable(R.drawable.goodface0);
             Drawable normalface =getResources().getDrawable(R.drawable.normalface);
+            Drawable badface0 =getResources().getDrawable(R.drawable.badface0);
+            Drawable badface =getResources().getDrawable(R.drawable.badface);
+            Drawable sickface =getResources().getDrawable(R.drawable.sickface);
 
-            textView1.setTextColor(Color.parseColor("#000000"));
-            textView1.setCompoundDrawablesWithIntrinsicBounds(null, null, goodface,null);
-            if(numInt-number<=0){
+
+            if(numInt-number<=-7){
+                textView1.setTextColor(Color.parseColor("#FF0000"));
+                textView1.setCompoundDrawablesWithIntrinsicBounds(null, null, sickface,null);
+            }else if(numInt-number <= -3){
                 textView1.setTextColor(Color.parseColor("#FF0000"));
                 textView1.setCompoundDrawablesWithIntrinsicBounds(null, null, badface,null);
+            }else if(numInt-number <= 0){
+                textView1.setTextColor(Color.parseColor("#FF5E00"));
+                textView1.setCompoundDrawablesWithIntrinsicBounds(null, null, badface0,null);
             }else if(numInt-number <= 3){
-                textView1.setTextColor(Color.parseColor("#0000FF"));
+                textView1.setTextColor(Color.parseColor("#FFE400"));
                 textView1.setCompoundDrawablesWithIntrinsicBounds(null, null, normalface,null);
+            }else if(numInt-number <= 7){
+                textView1.setTextColor(Color.parseColor("#000000"));
+                textView1.setCompoundDrawablesWithIntrinsicBounds(null, null, goodface0,null);
+            }else{
+                textView1.setTextColor(Color.parseColor("#000000"));
+                textView1.setCompoundDrawablesWithIntrinsicBounds(null, null, goodface,null);
             }
             textView1.setText(item.name);
             textView2.setText(item.info);
