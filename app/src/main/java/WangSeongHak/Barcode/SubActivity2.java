@@ -77,7 +77,7 @@ public class SubActivity2 extends AppCompatActivity {
     };
     @Override
     public void onBackPressed() {
-        Intent movepase1 = new Intent(getApplicationContext() , ClassifierActivity.class);
+        Intent movepase1 = new Intent(getApplicationContext() , MainActivity.class);
         startActivityForResult(movepase1,1);
 
 
